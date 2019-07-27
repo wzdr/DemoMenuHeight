@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:views="clr-namespace:ShellApp1.Views"
+       Title="ShellApp1"
+       x:Class="ShellApp1.AppShell">
+
+    <!-- 
+        Styles and Resources 
+    -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <FlyoutItem Title="Menu Height Demo" x:Name="MyFlyout" 
+                FlyoutDisplayOptions="AsMultipleItems">
+        <!-- Your Pages -->
+        <ShellContent Route="browse"
+                      Title="Browse"
+                      Icon="tab_feed.png"
+                      ContentTemplate="{DataTemplate views:ItemsPage}" />
+        <ShellContent Route="about"
+                      Title="About"
+                      Icon="tab_about.png"
+                      ContentTemplate="{DataTemplate views:AboutPage}" />
+    </FlyoutItem>
+
+    <MenuItem Text="About"
+              Icon="info.png" 
+              Command="{Binding AboutCommand}" />
+
+    <MenuItem Text="Settings"
+              Icon="random.png"
+              Command="{Binding SettingsCommand}" />
+
+    <!--// This header appears at the top of the Flyout.-->
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <ContentView BackgroundColor="Black" HeightRequest="150">
+                <StackLayout Spacing="10" Padding="20">
+                    <Label Text="Demo Menu Height App"
+                           TextColor="Wheat" FontSize="Medium"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Flyout Item Height is half"
+                           TextColor="Wheat" FontSize="Small"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    <Label Text="the size of Menu Item Height"
+                           TextColor="Wheat" FontSize="Small"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </ContentView>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <Shell.FlyoutHeader>
+        <Grid>
+            <Label Text="Flyout Header"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Template each FlyoutItem -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="1" Grid.Column="0" Source="{Binding Icon}"
+                       Margin="5"/>
+                <Label Grid.Row="1" Grid.Column="1"
+                       Text="{Binding Title}" TextColor="SkyBlue"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <!-- Template each MenuItem -->
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="1" Grid.Column="0" Source="{Binding Icon}"
+                       Margin="5"/>
+                <Label Grid.Row="1" Grid.Column="1"
+                       Text="{Binding Text}"
+                       FontAttributes="Italic" FontSize="Medium"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+</Shell>
